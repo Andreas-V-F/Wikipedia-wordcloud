@@ -5,6 +5,8 @@ from bs4 import BeautifulSoup
 import requests
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 import matplotlib.pyplot as plt
+from django.template import loader
+
 
 @ensure_csrf_cookie
 def index(request):
@@ -22,13 +24,7 @@ def index(request):
         for word in words:
             for w in word:
                 cleanWords.append(w)
-                
         string = " ".join(cleanWords)
-        wordcloud = WordCloud().generate(string)
-        plt.imshow(wordcloud, interpolation="bilinear")
-        plt.axis("off")
-        plt.show()
-        return render(request, "wordcloud.html")
+        wordcloud = WordCloud(width=800, height=400).generate(string)
+        wordcloud.to_file("./static/images/file.png")
     return render(request, "index.html")
-
-
