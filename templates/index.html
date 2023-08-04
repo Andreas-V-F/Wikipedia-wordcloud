@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+  </head>
+  <body>
+    <h1>Test</h1>
+    <form method="POST">
+      {% csrf_token %}
+      <input
+        type="url"
+        name="url"
+        id="url"
+        placeholder="https://www.wikipedia.org"
+        pattern="https://.*"
+        required
+      />
+      <input type="submit" />
+    </form>
+  </body>
+</html>
