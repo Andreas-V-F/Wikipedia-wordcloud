@@ -6,6 +6,7 @@ import requests
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 import matplotlib.pyplot as plt
 
+
 @ensure_csrf_cookie
 def index(request):
     if request.method == "POST":
@@ -22,13 +23,10 @@ def index(request):
         for word in words:
             for w in word:
                 cleanWords.append(w)
-                
         string = " ".join(cleanWords)
         wordcloud = WordCloud().generate(string)
         plt.imshow(wordcloud, interpolation="bilinear")
         plt.axis("off")
-        plt.show()
+        plt.savefig("./static/images/file")
         return render(request, "wordcloud.html")
     return render(request, "index.html")
-
-
